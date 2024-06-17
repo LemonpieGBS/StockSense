@@ -17,6 +17,7 @@ int main() {
         cout<<"\n 3. Reporte de Acciones";
         cout<<"\n 4. Exportar datos";
         cout<<"\n 5. <- Salir";
+        cout<<"\n\n#: ";
 
         cin>>input;
 
