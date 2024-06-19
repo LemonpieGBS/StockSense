@@ -22,10 +22,7 @@ void removeFromInventory(InventoryItems inventario[], int &inventory_size);
 void editOnInventory(InventoryItems inventario[], int inventory_size);
 void showInventory(InventoryItems inventario[], int inventory_size);
 
-int main() {
-
-    int inventory_items = 0;
-    InventoryItems inventario[MAX_INVENTORY_LENGTH];
+void mainInventory(InventoryItems inventario[], int &inventory_items) {
 
     while(true) {
 
@@ -49,7 +46,7 @@ int main() {
             case(2): removeFromInventory(inventario,inventory_items); break;
             case(3): editOnInventory(inventario,inventory_items); break;
             case(4): showInventory(inventario,inventory_items); system("pause"); break;
-            case(5): return 0; break;
+            case(5): return; break;
         }
     }
 }
