@@ -19,6 +19,7 @@ struct InventoryItems {
 std::string GenerateID();
 void addToInventory(InventoryItems inventario[], int &inventory_size);
 void removeFromInventory(InventoryItems inventario[], int &inventory_size);
+void editOnInventory(InventoryItems inventario[], int inventory_size);
 void showInventory(InventoryItems inventario[], int inventory_size);
 
 int main() {
@@ -45,8 +46,8 @@ int main() {
 
         switch(input) {
             case(1): addToInventory(inventario,inventory_items); break;
-            case(2): break;
-            case(3): break;
+            case(2): removeFromInventory(inventario,inventory_items); break;
+            case(3): editOnInventory(inventario,inventory_items); break;
             case(4): showInventory(inventario,inventory_items); system("pause"); break;
             case(5): return 0; break;
         }
@@ -113,8 +114,83 @@ void removeFromInventory(InventoryItems inventario[], int &inventory_size) {
     }
 
     if(itemFound == -1) {
-
+        std::cout<<"\nNo se pudo encontrar el producto, volviendo al menu...";
+        sleep(2);
+        return;
     }
+
+    std::cout<<"\nObjeto encontrado: "<<inventario[itemFound].name;
+    for(int i = itemFound; i < inventory_size - 1; i++) {
+        inventario[i] = inventario[i+1];
+    }
+
+    inventory_size++;
+    std::cout<<"\nObjeto eliminado con éxito!";
+}
+
+void editOnInventory(InventoryItems inventario[], int inventory_size) {
+
+    showInventory(inventario, inventory_size);
+    if(inventory_size <= 0) { sleep(2); return; }
+
+    std::string ID_input;
+    std::cout<<"\nInserte el ID del producto a eliminar: ";
+    std::cin>>ID_input;
+
+    int itemFound = -1;
+    for(int i = 0; i < inventory_size; i++) {
+        if(ID_input == inventario[i].id) { itemFound = i; break; }
+    }
+
+    if(itemFound == -1) {
+        std::cout<<"\nNo se pudo encontrar el producto, volviendo al menu...";
+        sleep(2);
+        return;
+    }
+
+    int attribute_input;
+    std::cout<<"\nObjeto encontrado: "<<inventario[itemFound].name;
+    std::cout<<"\nQue atributo desea editar? (1. NOMBRE / 2. PROVEEDOR / 3. UNIDADES / 4. PRECIO)";
+    std::cin>>attribute_input;
+
+    switch(attribute_input) {
+        case(1):
+        std::cout<<"\nValor viejo: "<<inventario[itemFound].name;
+        std::cout<<"\n\nValor nuevo: ";
+        std::cin>>inventario[itemFound].name;
+
+        std::cout<<"\nObjeto editado exitosamente!";
+        break;
+
+        case(2):
+        std::cout<<"\nValor viejo: "<<inventario[itemFound].provider;
+        std::cout<<"\n\nValor nuevo: ";
+        std::cin>>inventario[itemFound].provider;
+
+        std::cout<<"\nObjeto editado exitosamente!";
+        break;
+
+        case(3):
+        std::cout<<"\nValor viejo: "<<inventario[itemFound].quantity_left;
+        std::cout<<"\n\nValor nuevo: ";
+        std::cin>>inventario[itemFound].quantity_left;
+
+        std::cout<<"\nObjeto editado exitosamente!";
+        break;
+
+        case(4):
+        std::cout<<"\nValor viejo: "<<inventario[itemFound].price;
+        std::cout<<"\n\nValor nuevo: ";
+        std::cin>>inventario[itemFound].price;
+
+        std::cout<<"\nObjeto editado exitosamente!";
+        break;
+
+        default:
+        std::cout<<"ATRIBUTO INVALIDO! Volviendo al menú...";
+        break;
+    }
+    sleep(2);
 }
 
 void showInventory(InventoryItems inventario[], int inventory_size) {
