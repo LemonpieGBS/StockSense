@@ -32,11 +32,11 @@ void mainInventory(InventoryItems inventario[], int &inventory_items) {
         std::cout<<"Menu de Inventario";
         std::cout<<"\nEliga lo que quiera hacer:\n";
 
-        std::cout<<"\n 1.Añadir objeto a inventario";
-        std::cout<<"\n 2.Remover objeto de inventario";
-        std::cout<<"\n 3.Editar objeto de inventario";
-        std::cout<<"\n 4.Mostrar inventario";
-        std::cout<<"\n 5.<- Salir";
+        std::cout<<"\n 1. Añadir objeto a inventario";
+        std::cout<<"\n 2. Remover objeto de inventario";
+        std::cout<<"\n 3. Editar objeto de inventario";
+        std::cout<<"\n 4. Mostrar inventario";
+        std::cout<<"\n 5. <- Salir";
         std::cout<<"\n\n#:";
 
         std::cin>>input;

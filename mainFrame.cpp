@@ -1,10 +1,14 @@
 #include <iostream>
+#include "inventoryFunctions.h"
 
 using std::cout;
 using std::cin;
 using std::string;
 
 int main() {
+
+    InventoryItems inventario[MAX_INVENTORY_LENGTH];
+    int inventory_items = 0;
 
     while(true) {
         system("cls");
@@ -22,7 +26,7 @@ int main() {
         cin>>input;
 
         switch(input) {
-            case(1): break;
+            case(1): mainInventory(inventario,inventory_items); break;
             case(2): break;
             case(3): break;
             case(4): break;
