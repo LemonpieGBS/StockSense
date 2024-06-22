@@ -1,5 +1,5 @@
 #include <iostream>
-#include "inventoryFunctions.h"
+#include "facturacion.h"
 
 using std::cout;
 using std::cin;
@@ -27,7 +27,7 @@ int main() {
 
         switch(input) {
             case(1): mainInventory(inventario,inventory_items); break;
-            case(2): break;
+            case(2): facturarMain(inventario,inventory_items); break;
             case(3): break;
             case(4): break;
             case(5): return 0; break;
