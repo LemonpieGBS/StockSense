@@ -3,6 +3,8 @@
 #include <thread>
 #include <chrono>
 
+#include "Logs_final.cpp"
+
 #define sleep(x) std::this_thread::sleep_for(std::chrono::seconds(x))
 #define MAX_INVENTORY_LENGTH 100
 
@@ -93,6 +95,8 @@ void addToInventory(InventoryItems inventario[], int &inventory_size) {
     inventory_size++;
 
     std::cout<<"\nObjeto añadido con exito!";
+
+    registrarLog("Producto '" + new_item.name + "' agregado al inventario");
     sleep(2);
 }
 
@@ -115,6 +119,8 @@ void removeFromInventory(InventoryItems inventario[], int &inventory_size) {
         sleep(2);
         return;
     }
+
+    registrarLog("Producto '" + inventario[itemFound].name + "' fue borrado del inventario");
 
     std::cout<<"\nObjeto encontrado: "<<inventario[itemFound].name;
     for(int i = itemFound; i < inventory_size - 1; i++) {
@@ -149,36 +155,49 @@ void editOnInventory(InventoryItems inventario[], int inventory_size) {
     std::cout<<"\nObjeto encontrado: "<<inventario[itemFound].name;
     std::cout<<"\nQue atributo desea editar? (1. NOMBRE / 2. PROVEEDOR / 3. UNIDADES / 4. PRECIO)";
     std::cin>>attribute_input;
+    std::string old_att;
 
     switch(attribute_input) {
         case(1):
         std::cout<<"\nValor viejo: "<<inventario[itemFound].name;
+        old_att = inventario[itemFound].name;
         std::cout<<"\n\nValor nuevo: ";
         std::cin>>inventario[itemFound].name;
+
+        registrarLog("El nombre del producto '" + inventario[itemFound].name + "' fue cambiado de: '" + old_att + "' a '" + inventario[itemFound].name + "'");
 
         std::cout<<"\nObjeto editado exitosamente!";
         break;
 
         case(2):
         std::cout<<"\nValor viejo: "<<inventario[itemFound].provider;
+        old_att = inventario[itemFound].provider;
         std::cout<<"\n\nValor nuevo: ";
         std::cin>>inventario[itemFound].provider;
+
+        registrarLog("El proveedor del producto '" + inventario[itemFound].name + "' fue cambiado de: '" + old_att + "' a '" + inventario[itemFound].provider + "'");
 
         std::cout<<"\nObjeto editado exitosamente!";
         break;
 
         case(3):
         std::cout<<"\nValor viejo: "<<inventario[itemFound].quantity_left;
+        old_att = inventario[itemFound].quantity_left;
         std::cout<<"\n\nValor nuevo: ";
         std::cin>>inventario[itemFound].quantity_left;
+
+        registrarLog("La cantidad de unidades del producto '" + inventario[itemFound].name + "' fueron cambiadas de: '" + old_att + "' a '" + std::to_string(inventario[itemFound].quantity_left) + "'");
 
         std::cout<<"\nObjeto editado exitosamente!";
         break;
 
         case(4):
         std::cout<<"\nValor viejo: "<<inventario[itemFound].price;
+        old_att = inventario[itemFound].price;
         std::cout<<"\n\nValor nuevo: ";
         std::cin>>inventario[itemFound].price;
+
+        registrarLog("El precio del producto '" + inventario[itemFound].name + "' fue cambiado de: '" + old_att + "' a '" + std::to_string(inventario[itemFound].price) + "'");
 
         std::cout<<"\nObjeto editado exitosamente!";
         break;
