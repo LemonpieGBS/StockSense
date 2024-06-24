@@ -28,7 +28,7 @@ int main() {
         switch(input) {
             case(1): mainInventory(inventario,inventory_items); break;
             case(2): facturarMain(inventario,inventory_items); break;
-            case(3): break;
+            case(3): mostrarLogs(); system("pause"); break;
             case(4): break;
             case(5): return 0; break;
             default: break;
