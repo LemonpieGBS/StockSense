@@ -2,11 +2,15 @@
 #include <string>
 #include <iostream>
 
+#include "ficherosYcolores.h"
 #include "time_functions.h"
 using namespace std;
 
+void showLogsTitle();
+
 void registrarLog(const std::string& accion) {
-    ofstream archivo("logs.txt", std::ios::app); 
+
+    ofstream archivo(APPDATA_PATH + "logs.txt", std::ios::app); 
     if (archivo.is_open()) {
       
         int year = get_current_year();
@@ -24,8 +28,9 @@ void registrarLog(const std::string& accion) {
 
         archivo.close();
     } else {
-        std::cerr << "No se pudo abrir el archivo de logs." << std::endl;
+        textColored("#ERROR: No se pudo abrir el archivo de logs.",RED);
     }
+
 }
 /* PROTOTIPO DE LOGS #1
 void addToInventory(InventoryItems inventario[], int &inventory_size) {
@@ -48,16 +53,20 @@ void removeFromInventory(InventoryItems inventario[], int &inventory_size) {
 */
 
 void mostrarLogs() {
+
     system("cls");
-    ifstream archivo("logs.txt");
+    showLogsTitle();
+    ifstream archivo(APPDATA_PATH + "logs.txt");
     if (archivo.is_open()) {
+        std::cout<<"=========================================================\n\n";
         string linea;
         while (std::getline(archivo, linea)) {
-            std::cout << linea << std::endl;
+            textColored(linea + "\n",YELLOW);
         }
+        std::cout<<"\n=========================================================\n\n";
         archivo.close();
     } else {
-        cerr << "No se pudo abrir el archivo de logs." << endl;
+        textColored("- No se pudo abrir el archivo de logs.",RED);
     }
 }
 
@@ -77,3 +86,14 @@ switch (opcion) {
         break;
 }
 */
+
+void showLogsTitle() {
+    sColor(GREEN);
+    std::cout<<"  _____ ____      _    _   _ ____    _    ____ ____ ___ ___  _   _ _____ ____  \n";
+    std::cout<<" |_   _|  _ \\    / \\  | \\ | / ___|  / \\  / ___/ ___|_ _/ _ \\| \\ | | ____/ ___| \n";
+    std::cout<<"   | | | |_) |  / _ \\ |  \\| \\___ \\ / _ \\| |  | |    | | | | |  \\| |  _| \\___ \\ \n";
+    std::cout<<"   | | |  _ <  / ___ \\| |\\  |___) / ___ \\ |__| |___ | | |_| | |\\  | |___ ___) |\n";
+    std::cout<<"   |_| |_| \\_\\/_/   \\_\\_| \\_|____/_/   \\_\\____\\____|___\\___/|_| \\_|_____|____/ \n";
+    std::cout<<"\n";
+    resetColor();
+}
