@@ -2,19 +2,20 @@
 #include <string>
 #include <thread>
 #include <chrono>
-#include <fstream>
 
-#include "Logs_final.cpp"  // Asegúrate de que este archivo está correctamente ubicado y contiene las definiciones necesarias
+#include "Logs_final.cpp"
 
 #define sleep(x) std::this_thread::sleep_for(std::chrono::seconds(x))
 #define MAX_INVENTORY_LENGTH 100
 
 struct InventoryItems {
+
     std::string id;
     std::string name;
     std::string provider;
     int quantity_left;
     float price;
+
 };
 
 std::string GenerateID();
@@ -22,71 +23,51 @@ void addToInventory(InventoryItems inventario[], int &inventory_size);
 void removeFromInventory(InventoryItems inventario[], int &inventory_size);
 void editOnInventory(InventoryItems inventario[], int inventory_size);
 void showInventory(InventoryItems inventario[], int inventory_size);
-void exportToCSV(InventoryItems inventario[], int inventory_size, const std::string& filename);
 
 void mainInventory(InventoryItems inventario[], int &inventory_items) {
+
     while(true) {
+
         system("cls");
 
         int input;
-        std::cout << "Menu de Inventario";
-        std::cout << "\nEliga lo que quiera hacer:\n";
+        std::cout<<"Menu de Inventario";
+        std::cout<<"\nEliga lo que quiera hacer:\n";
 
-        std::cout << "\n 1. Añadir objeto a inventario";
-        std::cout << "\n 2. Remover objeto de inventario";
-        std::cout << "\n 3. Editar objeto de inventario";
-        std::cout << "\n 4. Mostrar inventario";
-        std::cout << "\n 5. Exportar inventario a CSV";
-        std::cout << "\n 6. <- Salir";
-        std::cout << "\n\n#:";
+        std::cout<<"\n 1. Añadir objeto a inventario";
+        std::cout<<"\n 2. Remover objeto de inventario";
+        std::cout<<"\n 3. Editar objeto de inventario";
+        std::cout<<"\n 4. Mostrar inventario";
+        std::cout<<"\n 5. <- Salir";
+        std::cout<<"\n\n#:";
 
-        std::cin >> input;
+        std::cin>>input;
 
         switch(input) {
-            case 1: addToInventory(inventario, inventory_items); break;
-            case 2: removeFromInventory(inventario, inventory_items); break;
-            case 3: editOnInventory(inventario, inventory_items); break;
-            case 4: showInventory(inventario, inventory_items); system("pause"); break;
-            case 5: exportToCSV(inventario, inventory_items, "inventario.csv"); break;
-            case 6: return; break;
-            default: std::cout << "Opcion invalida!"; sleep(2); break;
+            case(1): addToInventory(inventario,inventory_items); break;
+            case(2): removeFromInventory(inventario,inventory_items); break;
+            case(3): editOnInventory(inventario,inventory_items); break;
+            case(4): showInventory(inventario,inventory_items); system("pause"); break;
+            case(5): return; break;
         }
     }
 }
 
 std::string GenerateID() {
-    char allowed_characters[] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','X','Z'};
-    int charset_size = sizeof(allowed_characters) / sizeof(char);
+    char allowed_characters[] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G'
+    ,'H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','X','Z'};
+
+    int charset_size = sizeof(allowed_characters) / sizeof(allowed_characters[0]);
+
     std::string ID;
     int ID_SIZE = 8;
 
     for(int i = 0; i < ID_SIZE; i++) {
         ID += allowed_characters[rand() % charset_size];
     }
+
     return ID;
 }
-
-void exportToCSV(InventoryItems inventario[], int inventory_size, const std::string& filename) {
-    std::ofstream file;
-    file.open(filename);
-
-    // Escribe la cabecera del CSV
-    file << "ID,Nombre,Proveedor,Unidades,Precio\n";
-
-    // Escribe los datos de cada item del inventario
-    for (int i = 0; i < inventory_size; i++) {
-        file << inventario[i].id << ",";
-        file << inventario[i].name << ",";
-        file << inventario[i].provider << ",";
-        file << inventario[i].quantity_left << ",";
-        file << inventario[i].price << "\n";
-    }
-
-    file.close();
-    std::cout << "Datos exportados a " << filename << " exitosamente!\n";
-    sleep(2);
-}
-
 
 void addToInventory(InventoryItems inventario[], int &inventory_size) {
 
