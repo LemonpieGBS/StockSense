@@ -1,0 +1,3 @@
+2024-06-24 15:45:33 - Producto 'Pen' agregado al inventario
+2024-06-24 15:56:43 - Producto 'Oscar' agregado al inventario
+2024-06-24 16:15:00 - Producto 'Apple' agregado al inventario

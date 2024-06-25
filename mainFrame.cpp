@@ -1,5 +1,5 @@
 #include <iostream>
-#include "facturacion.h"
+#include "facturacion.cpp"
 
 using std::cout;
 using std::cin;
