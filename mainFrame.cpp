@@ -19,8 +19,7 @@ int main() {
         cout<<"\n 1. Inventario";
         cout<<"\n 2. Facturación";
         cout<<"\n 3. Reporte de Acciones";
-        cout<<"\n 4. Exportar datos";
-        cout<<"\n 5. <- Salir";
+        cout<<"\n 4. <- Salir";
         cout<<"\n\n#: ";
 
         cin>>input;
@@ -29,8 +28,7 @@ int main() {
             case(1): mainInventory(inventario,inventory_items); break;
             case(2): facturarMain(inventario,inventory_items); break;
             case(3): mostrarLogs(); system("pause"); break;
-            case(4): break;
-            case(5): return 0; break;
+            case(4): return 0; break;
             default: break;
         }
     }
