@@ -74,5 +74,6 @@
         "valarray": "cpp",
         "xhash": "cpp",
         "xtree": "cpp"
-    }
+    },
+    "cSpell.language": "en,es-ES"
 }

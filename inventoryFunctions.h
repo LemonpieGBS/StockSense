@@ -40,11 +40,11 @@ void mainInventory(InventoryItems inventario[], int &inventory_items)
         showInventoryTitle();
 
         int input;
-        textColored("- Menï¿½ principal de Inventario -\n", GREEN);
-        textColored("\n- Elija una opciï¿½n -\n", CYAN);
+        textColored("- Menú principal de Inventario -\n", GREEN);
+        textColored("\n- Elija una opción -\n", CYAN);
 
         cout << "\n  1. ";
-        textColored("Aï¿½adir objeto a inventario", ORANGE);
+        textColored("Añadir objeto a inventario", ORANGE);
         cout << "\n  2. ";
         textColored("Remover objeto del inventario", ORANGE);
         cout << "\n  3. ";
@@ -54,7 +54,7 @@ void mainInventory(InventoryItems inventario[], int &inventory_items)
         cout << "\n  5. ";
         textColored("Exportar inventario a CSV", ORANGE);
         cout << "\n  6. ";
-        textColored("<- Salir al menï¿½ principal", RED);
+        textColored("<- Salir al menú principal", RED);
         std::cout << "\n\n#: ";
 
         std::cin >> input;
@@ -83,7 +83,7 @@ void mainInventory(InventoryItems inventario[], int &inventory_items)
             return;
             break;
         default:
-            std::cout << "ï¿½Opciï¿½n invalida!";
+            std::cout << "¡Opción invalida!";
             sleep(2);
             break;
         }
@@ -155,7 +155,7 @@ void exportToCSV(InventoryItems inventario[], int inventory_size, const std::str
 
     file.close();
 
-    textColored("\nï¿½Datos exportados a ", CYAN);
+    textColored("\n¡Datos exportados a ", CYAN);
     textColored(filename, GREEN);
     textColored(" exitosamente!\n", CYAN);
 
@@ -171,7 +171,7 @@ void addToInventory(InventoryItems inventario[], int &inventory_size)
 
     std::cin.ignore();
 
-    textColored("- Menï¿½ de adiciï¿½n al inventario -", GREEN);
+    textColored("- Menú de adición al inventario -", GREEN);
     textColored("\n\n# - Inserte el nombre del producto: ", CYAN);
     getline(std::cin, new_item.name);
 
@@ -189,7 +189,7 @@ void addToInventory(InventoryItems inventario[], int &inventory_size)
     inventario[inventory_size] = new_item;
     inventory_size++;
 
-    textColored("\nï¿½Objeto agregado con ï¿½xito!", GREEN);
+    textColored("\n¡Objeto agregado con éxito!", GREEN);
 
     inventorySave(inventario, inventory_size);
     registrarLog("Producto '" + new_item.name + "' agregado al inventario");
@@ -201,7 +201,7 @@ void removeFromInventory(InventoryItems inventario[], int &inventory_size)
 
     system("cls");
     showInventoryTitle();
-    textColored("- Menï¿½ de eliminaciï¿½n de inventario -\n", RED);
+    textColored("- Menú de eliminación de inventario -\n", RED);
 
     showInventory(inventario, inventory_size);
     if (inventory_size <= 0)
@@ -226,7 +226,7 @@ void removeFromInventory(InventoryItems inventario[], int &inventory_size)
 
     if (itemFound == -1)
     {
-        textColored("\nNo se pudo encontrar el producto, volviendo al menï¿½...", RED);
+        textColored("\nNo se pudo encontrar el producto, volviendo al menú...", RED);
         sleep(2);
         return;
     }
@@ -241,7 +241,7 @@ void removeFromInventory(InventoryItems inventario[], int &inventory_size)
 
     inventory_size--;
     inventorySave(inventario, inventory_size);
-    textColored("\nObjeto eliminado con ï¿½xito!", GREEN);
+    textColored("\nObjeto eliminado con éxito!", GREEN);
     sleep(2);
 }
 
@@ -250,7 +250,7 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
 
     system("cls");
     showInventoryTitle();
-    textColored("- Menï¿½ de ediciï¿½n de inventario -\n", RED);
+    textColored("- Menú de edición de inventario -\n", RED);
 
     showInventory(inventario, inventory_size);
     if (inventory_size <= 0)
@@ -275,14 +275,14 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
 
     if (itemFound == -1)
     {
-        textColored("\nNo se pudo encontrar el producto, volviendo al menï¿½...", RED);
+        textColored("\nNo se pudo encontrar el producto, volviendo al menú...", RED);
         sleep(2);
         return;
     }
 
     int attribute_input;
     textColored("\nObjeto encontrado: " + inventario[itemFound].name, YELLOW);
-    textColored("\nï¿½Que atributo desea editar? (1. NOMBRE / 2. PROVEEDOR / 3. UNIDADES / 4. PRECIO)", CYAN);
+    textColored("\n¿Que atributo desea editar? (1. NOMBRE / 2. PROVEEDOR / 3. UNIDADES / 4. PRECIO)", CYAN);
     std::cout << "\n#: ";
     std::cin >> attribute_input;
     std::string old_att;
@@ -299,7 +299,7 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
 
         registrarLog("El nombre del producto '" + inventario[itemFound].name + "' fue cambiado de: '" + old_att + "' a '" + inventario[itemFound].name + "'");
 
-        textColored("\nï¿½Objeto editado exitosamente!", GREEN);
+        textColored("\n¡Objeto editado exitosamente!", GREEN);
         break;
 
     case (2):
@@ -312,7 +312,7 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
 
         registrarLog("El proveedor del producto '" + inventario[itemFound].name + "' fue cambiado de: '" + old_att + "' a '" + inventario[itemFound].provider + "'");
 
-        textColored("\nï¿½Objeto editado exitosamente!", GREEN);
+        textColored("\n¡Objeto editado exitosamente!", GREEN);
         break;
 
     case (3):
@@ -325,7 +325,7 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
 
         registrarLog("La cantidad de unidades del producto '" + inventario[itemFound].name + "' fueron cambiadas de: '" + old_att + "' a '" + std::to_string(inventario[itemFound].quantity_left) + "'");
 
-        textColored("\nï¿½Objeto editado exitosamente!", GREEN);
+        textColored("\n¡Objeto editado exitosamente!", GREEN);
         break;
 
     case (4):
@@ -338,11 +338,11 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
 
         registrarLog("El precio del producto '" + inventario[itemFound].name + "' fue cambiado de: '" + old_att + "' a '" + std::to_string(inventario[itemFound].price) + "'");
 
-        textColored("\nï¿½Objeto editado exitosamente!", GREEN);
+        textColored("\n¡Objeto editado exitosamente!", GREEN);
         break;
 
     default:
-        textColored("ATRIBUTO INVALIDO! Volviendo al menï¿½...", RED);
+        textColored("ATRIBUTO INVALIDO! Volviendo al menú...", RED);
         break;
     }
 
@@ -357,7 +357,7 @@ void showInventory(InventoryItems inventario[], int inventory_size)
 
     if (inventory_size == 0)
     {
-        std::cout << "ï¿½No hay objetos en el inventario!";
+        std::cout << "¡No hay objetos en el inventario!";
         return;
     }
 

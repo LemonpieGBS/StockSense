@@ -40,11 +40,11 @@ int main()
         cout << "Creado para: ";
         textColored("UAM - Nicaragua", CYAN);
 
-        textColored("\n- Elija una opciï¿½n -\n", CYAN);
+        textColored("\n- Elija una opción -\n", CYAN);
         cout << "\n  1. ";
         textColored("Inventario", ORANGE);
         cout << "\n  2. ";
-        textColored("Facturaciï¿½n", ORANGE);
+        textColored("Facturación", ORANGE);
         cout << "\n  3. ";
         textColored("Reporte de Transacciones", ORANGE);
         cout << "\n  4. ";
@@ -111,16 +111,16 @@ void mostrarCreditos()
     textColored("\nGrupo de trabajo\n", GREEN);
     cout << "\n- Coordinador de Grupo y responsable del sistema de inventario: ";
     textColored("Emilio Fernando Meza Ortiz", CYAN);
-    cout << "\n- Miembro de trabajo y responsable del sistema de facturaciï¿½n: ";
+    cout << "\n- Miembro de trabajo y responsable del sistema de facturación: ";
     textColored("Emmanuel Leonardo Aguilar Novoa", CYAN);
     cout << "\n- Miembro de trabajo y responsable del sistema de reporte de transacciones: ";
     textColored("Diego Armando Urbina Aviles", CYAN);
-    cout << "\n- Miembro de trabajo y responsable del sistema de exportaciï¿½n de datos: ";
+    cout << "\n- Miembro de trabajo y responsable del sistema de exportación de datos: ";
     textColored("Oscar Enrique Arnuero Ramos\n", CYAN);
     textColored("\n================================================================================================\n", GRAY);
 
     cout << "\n- Docente responsable: ";
-    textColored("Silvia Gigdalia Ticay Lï¿½pez", GREEN);
+    textColored("Silvia Gigdalia Ticay López", GREEN);
     textColored("\n\nPara la facultad de Ingenieria y Arquitectura de la Universidad Americana (UAM) Nicaragua", YELLOW);
     textColored("\nVersion " + version + "\n", YELLOW);
 
