@@ -1,5 +1,7 @@
 #include <iostream>
 #include <direct.h>
+#include <wchar.h>
+#include <locale.h>
 
 #include "facturacionModulo.h"
 
@@ -13,6 +15,8 @@ void showMenuTitle();
 void mostrarCreditos();
 
 int main() {
+
+    setlocale(LC_ALL, "spanish");
 
     _mkdir(APPDATA_PATH.c_str());
     _mkdir((APPDATA_PATH + "exports").c_str());
@@ -31,12 +35,12 @@ int main() {
         sColor(GREEN); showMenuTitle(); resetColor();
         cout<<"Creado para: "; textColored("UAM - Nicaragua", CYAN);
 
-        textColored("\n- Elija una opcion -\n", CYAN);
-        cout<<"\n  1. "; textColored("Inventario",DARK_YELLOW);
-        cout<<"\n  2. "; textColored("Facturacion",DARK_YELLOW);
-        cout<<"\n  3. "; textColored("Reporte de Transacciones",DARK_YELLOW);
-        cout<<"\n  4. "; textColored("Abrir Carpeta de Datos",DARK_YELLOW);
-        cout<<"\n  5. "; textColored("Mostrar Creditos",DARK_YELLOW);
+        textColored("\n- Elija una opción -\n", CYAN);
+        cout<<"\n  1. "; textColored("Inventario",ORANGE);
+        cout<<"\n  2. "; textColored("Facturación",ORANGE);
+        cout<<"\n  3. "; textColored("Reporte de Transacciones",ORANGE);
+        cout<<"\n  4. "; textColored("Abrir Carpeta de Datos",ORANGE);
+        cout<<"\n  5. "; textColored("Mostrar Creditos",ORANGE);
         cout<<"\n  6. "; textColored("<- Salir del Programa",RED);
         cout<<"\n\n#: ";
 
@@ -72,15 +76,15 @@ void mostrarCreditos() {
     sColor(GREEN); showMenuTitle(); resetColor();
     cout<<"Creado para: "; textColored("UAM - Nicaragua", CYAN);
 
-    cout<<"\n\n================================================================================================\n";
-    textColored("Grupo de trabajo\n",GREEN);
+    textColored("\n\n================================================================================================\n",GRAY);
+    textColored("\nGrupo de trabajo\n",GREEN);
     cout<<"\n- Coordinador de Grupo y responsable del sistema de inventario: "; textColored("Emilio Fernando Meza Ortiz",CYAN);
-    cout<<"\n- Miembro de trabajo y responsable del sistema de facturacion: "; textColored("Emmanuel Leonardo Aguilar Novoa",CYAN);
+    cout<<"\n- Miembro de trabajo y responsable del sistema de facturación: "; textColored("Emmanuel Leonardo Aguilar Novoa",CYAN);
     cout<<"\n- Miembro de trabajo y responsable del sistema de reporte de transacciones: "; textColored("Diego Armando Urbina Aviles",CYAN);
-    cout<<"\n- Miembro de trabajo y responsable del sistema de exportacion de datos: "; textColored("Oscar Enrique Arnuero Ramos",CYAN);
-    cout<<"\n\n================================================================================================\n";
+    cout<<"\n- Miembro de trabajo y responsable del sistema de exportación de datos: "; textColored("Oscar Enrique Arnuero Ramos\n",CYAN);
+    textColored("\n================================================================================================\n",GRAY);
 
-    cout<<"\n- Docente responsable: "; textColored("Silvia Gigdalia Ticay LÃ³pez",GREEN);
+    cout<<"\n- Docente responsable: "; textColored("Silvia Gigdalia Ticay López",GREEN);
     textColored("\n\nPara la facultad de Ingenieria y Arquitectura de la Universidad Americana (UAM) Nicaragua",YELLOW);
     textColored("\nVersion " + version + "\n",YELLOW);
 

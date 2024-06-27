@@ -19,11 +19,11 @@ void mostrarMenu() {
 
     system("cls");
     showFacturacionTitle();
-    textColored("- Menu principal de Facturacion -\n",GREEN);
+    textColored("- Menú principal de Facturación -\n",GREEN);
     textColored("\n- Elija una opcion -\n\n", CYAN);
 
-    std::cout << "1. "; textColored("Facturar\n",DARK_YELLOW);
-    std::cout << "2. "; textColored("<- Salir de Facturacion\n\n",RED);
+    std::cout << "1. "; textColored("Facturar\n",ORANGE);
+    std::cout << "2. "; textColored("<- Salir de facturación\n\n",RED);
 
 }
 
@@ -47,14 +47,14 @@ void exportarFacturaCSV(Producto productos_facturados[], int productos_cant, con
     file << "Total,,," << total << "\n";
 
     file.close();
-    std::cout << "Factura exportada a " << filename << " exitosamente!\n";
+    std::cout << "¡Factura exportada a " << filename << " exitosamente!\n";
 }
 
 void facturar(InventoryItems arr[], int inv_cant) {
     system("cls");
     showFacturacionTitle();
 
-    textColored("- Modulo de Facturacion -\n",GREEN);
+    textColored("- Módulo de Facturación -\n",GREEN);
 
     std::string factura_nombre;
     textColored("\n#: Ingrese el nombre de la factura: ",CYAN);
@@ -89,18 +89,18 @@ void facturar(InventoryItems arr[], int inv_cant) {
         textColored("\n#: Ingrese el numero del producto a facturar: ",CYAN);
         std::cin >> objeto_opcion;
 
-        if (objeto_opcion > inv_cant || objeto_opcion < 0) textColored("Objeto invalido!\n",RED);
+        if (objeto_opcion > inv_cant || objeto_opcion < 0) textColored("¡Objeto invalido!\n",RED);
         else {
             int unidades_deseadas;
 
-            textColored("\n#: Cuantas unidades desea del producto \"",CYAN);
+            textColored("\n#: ¿Cuantas unidades desea del producto \"",CYAN);
             textColored(arr[objeto_opcion - 1].name, PURPLE);
             textColored("\"?: ",CYAN);
 
             std::cin >> unidades_deseadas;
 
             if (unidades_deseadas > arr[objeto_opcion - 1].quantity_left) {
-                textColored("\nNo hay suficientes unidades en inventario!\n",RED);
+                textColored("\n¡No hay suficientes unidades en inventario!\n",RED);
             } else {
                 bool objeto_ya_facturado = false;
                 for (i = 0; i < productos_cant; i++) {
@@ -124,7 +124,7 @@ void facturar(InventoryItems arr[], int inv_cant) {
             }
         }
 
-        textColored("\n#: Desea agregar otro producto? (S/N): ",CYAN);
+        textColored("\n#: ¿Desea agregar otro producto? (S/N): ",CYAN);
         std::cin >> SN;
 
         if (SN == "N" || SN == "n") facturar_loop = false;
@@ -133,17 +133,17 @@ void facturar(InventoryItems arr[], int inv_cant) {
 
     if (productos_cant == 0) return;
 
-    std::cout << "\n============================================" << std::endl;
+    textColored("================================================================================================\n\n",GRAY);
     std::cout << "NOMBRE DE FACTURA: " << factura_nombre << std::endl;
-    std::cout << "============================================" << std::endl;
+    textColored("================================================================================================\n\n",GRAY);
     for (int i = 0; i < productos_cant; i++) {
         std::cout << productos_facturados[i].nombre << " - $" << productos_facturados[i].precio;
         if (productos_facturados[i].unidades_compradas > 1) {
             std::cout << " - (x" << productos_facturados[i].unidades_compradas << ") - $" << (productos_facturados[i].precio * productos_facturados[i].unidades_compradas) << std::endl;
-        }
+        } else std::cout << std::endl;
         total += (productos_facturados[i].precio * productos_facturados[i].unidades_compradas);
     }
-    std::cout << "============================================" << std::endl;
+    textColored("================================================================================================\n\n",GRAY);
     std::cout << "Total a pagar: $" << total << std::endl << std::endl;
     system("pause");
 
@@ -170,7 +170,7 @@ void facturarMain(InventoryItems arr[], int inv_cant) {
                 std::cout << "Saliendo del programa..." << std::endl;
                 return;
             default:
-                std::cout << "Opcion invalida. Intente nuevamente." << std::endl;
+                std::cout << "Opcion inválida. Intente nuevamente." << std::endl;
                 break;
         }
     } while (opcion != 2);

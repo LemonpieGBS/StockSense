@@ -58,12 +58,12 @@ void mostrarLogs() {
     showLogsTitle();
     ifstream archivo(APPDATA_PATH + "logs.txt");
     if (archivo.is_open()) {
-        std::cout<<"=========================================================\n\n";
+        textColored("================================================================================================\n",GRAY);
         string linea;
         while (std::getline(archivo, linea)) {
             textColored(linea + "\n",YELLOW);
         }
-        std::cout<<"\n=========================================================\n\n";
+        textColored("================================================================================================\n",GRAY);
         archivo.close();
     } else {
         textColored("- No se pudo abrir el archivo de logs.",RED);
