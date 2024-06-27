@@ -1,8 +1,3 @@
-<style>
-    h1 {
-        text-align: center;
-    }
-</style>
 <h1> StockSense </h1>
 
 ![image](./screenshots/scr-1.png)
