@@ -2,6 +2,7 @@
 #include <direct.h> // Biblioteca para operaciones de directorios (como crear directorios)
 #include <wchar.h>  // Biblioteca para manejar caracteres anchos
 #include <locale.h> // Biblioteca para configurar la localización
+#include <sstream>
 
 #include "facturacionModulo.h" // Incluye el módulo de facturación, se asume que este archivo contiene funciones relacionadas a la facturación
 

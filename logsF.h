@@ -75,3 +75,11 @@ void showLogsTitle()
     std::cout << "\n";
     resetColor();
 }
+
+// stof porque se muere
+float stringToFloat(std::string w) {
+    std::locale::global(std::locale("C"));
+    float returner = std::stof(w);
+    setlocale(LC_ALL, "spanish");
+    return returner;
+}

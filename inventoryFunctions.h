@@ -437,7 +437,7 @@ bool inventoryLoad(InventoryItems inventario[], int &inventory_size)
                         inventario[inventory_size].quantity_left = std::stoi(current_word);
                         break;
                     case 5:
-                        inventario[inventory_size].price = std::stof(current_word);
+                        inventario[inventory_size].price = stringToFloat(current_word);
                         break;
                     default:
                         break;

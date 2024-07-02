@@ -149,9 +149,10 @@ void fetchInput(float &input) {
     }
 
     std::cout << "\n";  // Nueva línea después de la entrada
-    input = stof(return_string);  // Convertir cadena a flotante y asignar a la variable de referencia
-    std::cout<<return_string<<std::endl;
-    std::cout<<stof(return_string);
+
+    std::locale::global(std::locale("C"));
+    input = std::stof(return_string); // Convertir cadena a flotante y asignar a la variable de referencia
+    setlocale(LC_ALL, "spanish");
 }
 
 void fetchInputSN(std::string &input) {
