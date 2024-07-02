@@ -239,6 +239,12 @@ void removeFromInventory(InventoryItems inventario[], int &inventory_size)
         return;
     }
 
+    std::string SN;
+    textColored("\n#- ESTA SEGURO DE BORRAR EL OBJETO DEL INVENTARIO? (S/N): ", RED);
+    fetchInputSN(SN);
+
+    if (SN == "N" || SN == "n") return;
+
     registrarLog("Producto '" + inventario[itemFound].name + "' fue borrado del inventario");
 
     textColored("\nObjeto encontrado: " + inventario[itemFound].name, YELLOW);
