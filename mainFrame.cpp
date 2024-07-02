@@ -19,6 +19,10 @@ int main()
     // Establece la configuración regional a español
     setlocale(LC_ALL, "spanish");
 
+    // Porque los floats no funcionan
+    std::cout.precision(2);
+    std::cout.setf(std::ios::fixed);
+
     // Crea los directorios necesarios si no existen
     _mkdir(APPDATA_PATH.c_str());
     _mkdir((APPDATA_PATH + "exports").c_str());

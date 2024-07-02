@@ -148,7 +148,7 @@ void exportToCSV(InventoryItems inventario[], int inventory_size, const std::str
     // Escribe los datos de cada item del inventario
     for (int i = 0; i < inventory_size; i++)
     {
-        file << inventario[i].id << ",";
+        file << (i+1) << ",";
         file << inventario[i].name << ",";
         file << inventario[i].provider << ",";
         file << inventario[i].quantity_left << ",";
@@ -220,18 +220,16 @@ void removeFromInventory(InventoryItems inventario[], int &inventory_size)
         return;
     }
 
-    std::string ID_input;
+    int ID_input;
     textColored("\n# - Inserte el ID del producto a eliminar: ", CYAN);
     fetchInput(ID_input);
 
-    int itemFound = -1;
-    for (int i = 0; i < inventory_size; i++)
+    int itemFound = ID_input - 1;
+    if (itemFound < 0 || itemFound >= inventory_size)
     {
-        if (ID_input == inventario[i].id)
-        {
-            itemFound = i;
-            break;
-        }
+        textColored("\nEl ID que ingresó no es válido, volviendo al menú...", RED);
+        sleep(2);
+        return;
     }
 
     if (itemFound == -1)
@@ -269,23 +267,14 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
         return;
     }
 
-    std::string ID_input;
+    int ID_input;
     textColored("\n# - Inserte el ID del producto a editar: ", CYAN);
     fetchInput(ID_input);
 
-    int itemFound = -1;
-    for (int i = 0; i < inventory_size; i++)
+    int itemFound = ID_input - 1;
+    if (itemFound < 0 || itemFound >= inventory_size)
     {
-        if (ID_input == inventario[i].id)
-        {
-            itemFound = i;
-            break;
-        }
-    }
-
-    if (itemFound == -1)
-    {
-        textColored("\nNo se pudo encontrar el producto, volviendo al menú...", RED);
+        textColored("\nEl ID que ingresó no es válido, volviendo al menú...", RED);
         sleep(2);
         return;
     }
@@ -385,18 +374,17 @@ void showInventory(InventoryItems inventario[], int inventory_size)
     // Recorre e imprime cada item del inventario
     for (int i = 0; i < inventory_size; i++)
     {
-        textColored("\n- ID: ", GREEN);
-        std::cout << inventario[i].id << ", ";
+        textColored("\n- #: ", GREEN);
+        std::cout << (i+1) << ", ";
         textColored("Nombre: ", GREEN);
         std::cout << inventario[i].name;
 
         textColored("\n  Proveedor: ", GREEN);
         std::cout << inventario[i].provider << ", ";
         textColored("Unidades: ", GREEN);
-        std::cout << inventario[i].quantity_left;
-
-        textColored("\n  Precio: ", GREEN);
-        std::cout << inventario[i].price << "\n\n";
+        std::cout << inventario[i].quantity_left << ", ";
+        textColored("Precio: ", GREEN);
+        std::cout << inventario[i].price << "\n";
         textColored("================================================================================================\n", GRAY);
     }
 }
