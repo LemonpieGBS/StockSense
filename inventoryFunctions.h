@@ -4,13 +4,15 @@
 #include <chrono>
 #include <fstream>
 
-#include "logsF.h" // AsegÃºrate de que este archivo estÃ¡ correctamente ubicado y contiene las definiciones necesarias
+#include "logsF.h" // Asegúrate de que este archivo está correctamente ubicado y contiene las definiciones necesarias
 
+// Macros para facilitar el uso de sleep y definir el tamaño máximo del inventario
 #define sleep(x) std::this_thread::sleep_for(std::chrono::seconds(x))
 #define MAX_INVENTORY_LENGTH 100
 
 using std::to_string;
 
+// Estructura para representar los elementos del inventario
 struct InventoryItems
 {
     std::string id;
@@ -20,6 +22,7 @@ struct InventoryItems
     float price;
 };
 
+// Declaraciones de funciones
 std::string GenerateID();
 bool inventoryLoad(InventoryItems inventario[], int &inventory_size);
 void inventorySave(InventoryItems inventario[], int &inventory_size);
@@ -31,9 +34,9 @@ void exportToCSV(InventoryItems inventario[], int inventory_size, const std::str
 void showInventoryTitle();
 std::string generateCSVName();
 
+// Función principal del inventario que muestra el menú principal y gestiona las opciones del usuario
 void mainInventory(InventoryItems inventario[], int &inventory_items)
 {
-
     while (true)
     {
         system("cls");
@@ -43,22 +46,24 @@ void mainInventory(InventoryItems inventario[], int &inventory_items)
         textColored("- Menú principal de Inventario -\n", GREEN);
         textColored("\n- Elija una opción -\n", CYAN);
 
-        cout << "\n  1. ";
+        // Opciones del menú principal
+        std::cout << "\n  1. ";
         textColored("Añadir objeto a inventario", ORANGE);
-        cout << "\n  2. ";
+        std::cout << "\n  2. ";
         textColored("Remover objeto del inventario", ORANGE);
-        cout << "\n  3. ";
+        std::cout << "\n  3. ";
         textColored("Editar objeto del inventario", ORANGE);
-        cout << "\n  4. ";
+        std::cout << "\n  4. ";
         textColored("Mostrar inventario actual", ORANGE);
-        cout << "\n  5. ";
+        std::cout << "\n  5. ";
         textColored("Exportar inventario a CSV", ORANGE);
-        cout << "\n  6. ";
+        std::cout << "\n  6. ";
         textColored("<- Salir al menú principal", RED);
         std::cout << "\n\n#: ";
 
         std::cin >> input;
 
+        // Manejo de las opciones del menú
         switch (input)
         {
         case 1:
@@ -81,7 +86,6 @@ void mainInventory(InventoryItems inventario[], int &inventory_items)
             break;
         case 6:
             return;
-            break;
         default:
             std::cout << "¡Opción invalida!";
             sleep(2);
@@ -90,9 +94,9 @@ void mainInventory(InventoryItems inventario[], int &inventory_items)
     }
 }
 
+// Genera un nombre único para el archivo CSV basado en la fecha actual
 std::string generateCSVName()
 {
-
     std::string date_f = to_string(get_current_year()) + "_" + to_string(get_current_month()) + "_" + to_string(get_current_day());
     std::string csv_filename = "INVENTARIO_ESTADO - " + date_f + "_";
     bool valid_file = false;
@@ -101,7 +105,6 @@ std::string generateCSVName()
     do
     {
         std::ifstream check_file(APPDATA_PATH + "exports\\" + csv_filename + to_string(i) + ".csv");
-
         if (!check_file.is_open())
         {
             valid_file = true;
@@ -112,17 +115,15 @@ std::string generateCSVName()
             i++;
             check_file.close();
         }
-
     } while (!valid_file);
 
     return csv_filename + ".csv";
 }
 
+// Genera un ID único para un producto
 std::string GenerateID()
 {
-
     srand(time(0));
-
     char allowed_characters[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'Y', 'X', 'Z'};
     int charset_size = sizeof(allowed_characters) / sizeof(char);
     std::string ID;
@@ -135,6 +136,7 @@ std::string GenerateID()
     return ID;
 }
 
+// Exporta los datos del inventario a un archivo CSV
 void exportToCSV(InventoryItems inventario[], int inventory_size, const std::string &filename)
 {
     std::ofstream file;
@@ -162,9 +164,9 @@ void exportToCSV(InventoryItems inventario[], int inventory_size, const std::str
     sleep(2);
 }
 
+// Añade un nuevo item al inventario
 void addToInventory(InventoryItems inventario[], int &inventory_size)
 {
-
     system("cls");
     showInventoryTitle();
     InventoryItems new_item;
@@ -196,9 +198,9 @@ void addToInventory(InventoryItems inventario[], int &inventory_size)
     sleep(2);
 }
 
+// Remueve un item del inventario basado en su ID
 void removeFromInventory(InventoryItems inventario[], int &inventory_size)
 {
-
     system("cls");
     showInventoryTitle();
     textColored("- Menú de eliminación de inventario -\n", RED);
@@ -245,9 +247,9 @@ void removeFromInventory(InventoryItems inventario[], int &inventory_size)
     sleep(2);
 }
 
+// Edita un item del inventario basado en su ID
 void editOnInventory(InventoryItems inventario[], int inventory_size)
 {
-
     system("cls");
     showInventoryTitle();
     textColored("- Menú de edición de inventario -\n", RED);
@@ -287,6 +289,7 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
     std::cin >> attribute_input;
     std::string old_att;
 
+    // Edita el atributo seleccionado del item encontrado
     switch (attribute_input)
     {
     case (1):
@@ -350,9 +353,9 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
     sleep(2);
 }
 
+// Muestra el inventario actual
 void showInventory(InventoryItems inventario[], int inventory_size)
 {
-
     textColored("- Inventario Actual -\n\n", GREEN);
 
     if (inventory_size == 0)
@@ -361,9 +364,9 @@ void showInventory(InventoryItems inventario[], int inventory_size)
         return;
     }
 
+    // Recorre e imprime cada item del inventario
     for (int i = 0; i < inventory_size; i++)
     {
-
         textColored("\n- ID: ", GREEN);
         std::cout << inventario[i].id << ", ";
         textColored("Nombre: ", GREEN);
@@ -380,6 +383,7 @@ void showInventory(InventoryItems inventario[], int inventory_size)
     }
 }
 
+// Muestra el título del inventario
 void showInventoryTitle()
 {
     sColor(GREEN);
@@ -392,9 +396,9 @@ void showInventoryTitle()
     resetColor();
 }
 
+// Carga el inventario desde un archivo
 bool inventoryLoad(InventoryItems inventario[], int &inventory_size)
 {
-
     std::ifstream FILE(APPDATA_PATH + "inventario.dat");
     if (FILE.is_open())
     {
@@ -402,13 +406,11 @@ bool inventoryLoad(InventoryItems inventario[], int &inventory_size)
 
         while (std::getline(FILE, curr_line))
         {
-
             int wrd_cnt = 0;
             std::string current_word = "";
 
             for (char ch : curr_line)
             {
-
                 if (ch != ';')
                     current_word += ch;
                 else
@@ -437,7 +439,6 @@ bool inventoryLoad(InventoryItems inventario[], int &inventory_size)
                     current_word = "";
                 }
             }
-
             inventory_size++;
         }
         return true;
@@ -448,9 +449,9 @@ bool inventoryLoad(InventoryItems inventario[], int &inventory_size)
     }
 }
 
+// Guarda el inventario en un archivo
 void inventorySave(InventoryItems inventario[], int &inventory_size)
 {
-
     std::ofstream FILE(APPDATA_PATH + "inventario.dat");
     for (int i = 0; i < inventory_size; i++)
     {

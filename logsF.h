@@ -4,17 +4,20 @@
 
 #include "ficherosYcolores.h"
 #include "time_functions.h"
+
 using namespace std;
 
+// Declaración de funciones
 void showLogsTitle();
+void registrarLog(const std::string &accion);
+void mostrarLogs();
 
+// Registra una acción en el archivo de logs con la fecha y hora actual
 void registrarLog(const std::string &accion)
 {
-
     ofstream archivo(APPDATA_PATH + "logs.txt", std::ios::app);
     if (archivo.is_open())
     {
-
         int year = get_current_year();
         int month = get_current_month();
         int day = get_current_day();
@@ -22,11 +25,12 @@ void registrarLog(const std::string &accion)
         int minute = get_current_minute();
         int second = get_current_second();
 
+        // Formatea la fecha y hora
         char buffer[80];
         std::sprintf(buffer, "%04d-%02d-%02d %02d:%02d:%02d", year, month, day, hour, minute, second);
 
+        // Escribe la fecha, hora y la acción en el archivo de logs
         archivo << buffer << " - " << accion << std::endl;
-
         archivo.close();
     }
     else
@@ -34,29 +38,10 @@ void registrarLog(const std::string &accion)
         textColored("#ERROR: No se pudo abrir el archivo de logs.", RED);
     }
 }
-/* PROTOTIPO DE LOGS #1
-void addToInventory(InventoryItems inventario[], int &inventory_size) {
 
-    cout << "Producto agregado al inventario." << std::endl;
-    inventory_size++;
-
-    registrarLog("Producto agregado al inventario");
-}
-*/
-
-/* PROTOTIPO DE LOGS #2
-void removeFromInventory(InventoryItems inventario[], int &inventory_size) {
-    cout << "Producto eliminado del inventario." << endl;
-    inventory_size--;
-
-
-    registrarLog("Producto eliminado del inventario");
-}
-*/
-
+// Muestra los logs en la consola
 void mostrarLogs()
 {
-
     system("cls");
     showLogsTitle();
     ifstream archivo(APPDATA_PATH + "logs.txt");
@@ -77,23 +62,7 @@ void mostrarLogs()
     }
 }
 
-/* OpciÃ³n de Prueba
-switch (opcion) {
-    case 1:
-        addToInventory(inventario, inventory_size);
-        break;
-    case 2:
-        removeFromInventory(inventario, inventory_size);
-        break;
-    case 3:
-        editOnInventory(inventario, inventory_size);
-        break;
-    case 4:
-        mostrarLogs();
-        break;
-}
-*/
-
+// Muestra el título de los logs en la consola
 void showLogsTitle()
 {
     sColor(GREEN);
