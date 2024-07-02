@@ -4,6 +4,7 @@
 
 #include "ficherosYcolores.h"
 #include "time_functions.h"
+#include "fetchInput.h"
 
 using namespace std;
 

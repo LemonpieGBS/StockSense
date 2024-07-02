@@ -61,7 +61,7 @@ void mainInventory(InventoryItems inventario[], int &inventory_items)
         textColored("<- Salir al menú principal", RED);
         std::cout << "\n\n#: ";
 
-        std::cin >> input;
+        fetchInput(input);
 
         // Manejo de las opciones del menú
         switch (input)
@@ -171,20 +171,28 @@ void addToInventory(InventoryItems inventario[], int &inventory_size)
     showInventoryTitle();
     InventoryItems new_item;
 
-    std::cin.ignore();
-
     textColored("- Menú de adición al inventario -", GREEN);
     textColored("\n\n# - Inserte el nombre del producto: ", CYAN);
-    getline(std::cin, new_item.name);
+    fetchInput(new_item.name);
 
     textColored("\n# - Inserte el proveedor del producto: ", CYAN);
-    getline(std::cin, new_item.provider);
+    fetchInput(new_item.provider);
 
     textColored("\n# - Inserte la cantidad de unidades: ", CYAN);
-    std::cin >> new_item.quantity_left;
+    fetchInput(new_item.quantity_left);
+
+    while(new_item.quantity_left < 0) {
+        textColored("\n# - Inserte una cantidad valida: ", RED);
+        fetchInput(new_item.quantity_left);
+    }
 
     textColored("\n# - Inserte el precio del producto: ", CYAN);
-    std::cin >> new_item.price;
+    fetchInput(new_item.price);
+
+    while(new_item.price <= 0) {
+        textColored("\n# - Inserte una cantidad valida: ", RED);
+        fetchInput(new_item.price);
+    }
 
     new_item.id = GenerateID();
 
@@ -214,7 +222,7 @@ void removeFromInventory(InventoryItems inventario[], int &inventory_size)
 
     std::string ID_input;
     textColored("\n# - Inserte el ID del producto a eliminar: ", CYAN);
-    std::cin >> ID_input;
+    fetchInput(ID_input);
 
     int itemFound = -1;
     for (int i = 0; i < inventory_size; i++)
@@ -263,7 +271,7 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
 
     std::string ID_input;
     textColored("\n# - Inserte el ID del producto a editar: ", CYAN);
-    std::cin >> ID_input;
+    fetchInput(ID_input);
 
     int itemFound = -1;
     for (int i = 0; i < inventory_size; i++)
@@ -286,7 +294,7 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
     textColored("\nObjeto encontrado: " + inventario[itemFound].name, YELLOW);
     textColored("\n¿Que atributo desea editar? (1. NOMBRE / 2. PROVEEDOR / 3. UNIDADES / 4. PRECIO)", CYAN);
     std::cout << "\n#: ";
-    std::cin >> attribute_input;
+    fetchInput(attribute_input);
     std::string old_att;
 
     // Edita el atributo seleccionado del item encontrado
@@ -298,7 +306,7 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
         old_att = inventario[itemFound].name;
 
         textColored("\n\nValor nuevo: ", GREEN);
-        std::cin >> inventario[itemFound].name;
+        fetchInput(inventario[itemFound].name);
 
         registrarLog("El nombre del producto '" + inventario[itemFound].name + "' fue cambiado de: '" + old_att + "' a '" + inventario[itemFound].name + "'");
 
@@ -311,7 +319,7 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
         old_att = inventario[itemFound].provider;
 
         textColored("\n\nValor nuevo: ", GREEN);
-        std::cin >> inventario[itemFound].provider;
+        fetchInput(inventario[itemFound].provider);
 
         registrarLog("El proveedor del producto '" + inventario[itemFound].name + "' fue cambiado de: '" + old_att + "' a '" + inventario[itemFound].provider + "'");
 
@@ -324,7 +332,12 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
         old_att = inventario[itemFound].quantity_left;
 
         textColored("\n\nValor nuevo: ", GREEN);
-        std::cin >> inventario[itemFound].quantity_left;
+        fetchInput(inventario[itemFound].quantity_left);
+
+        while(inventario[itemFound].quantity_left < 0) {
+            textColored("\n# - Inserte una cantidad valida: ", RED);
+            fetchInput(inventario[itemFound].quantity_left);
+        }
 
         registrarLog("La cantidad de unidades del producto '" + inventario[itemFound].name + "' fueron cambiadas de: '" + old_att + "' a '" + std::to_string(inventario[itemFound].quantity_left) + "'");
 
@@ -337,7 +350,12 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
         old_att = inventario[itemFound].price;
 
         textColored("\n\nValor nuevo: ", GREEN);
-        std::cin >> inventario[itemFound].price;
+        fetchInput(inventario[itemFound].price);
+
+        while(inventario[itemFound].price <= 0) {
+            textColored("\n# - Inserte una cantidad valida: ", RED);
+            fetchInput(inventario[itemFound].price);
+        }
 
         registrarLog("El precio del producto '" + inventario[itemFound].name + "' fue cambiado de: '" + old_att + "' a '" + std::to_string(inventario[itemFound].price) + "'");
 

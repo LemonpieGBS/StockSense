@@ -69,8 +69,7 @@ void facturar(InventoryItems arr[], int inv_cant)
 
     std::string factura_nombre;
     textColored("\n#: Ingrese el nombre de la factura: ", CYAN);
-    std::cin.ignore();
-    std::getline(std::cin, factura_nombre);  // Lee el nombre de la factura
+    fetchInput(factura_nombre);  // Lee el nombre de la factura
 
     if (inv_cant == 0)
     {
@@ -105,7 +104,7 @@ void facturar(InventoryItems arr[], int inv_cant)
         std::string SN;
 
         textColored("\n#: Ingrese el numero del producto a facturar: ", CYAN);
-        std::cin >> objeto_opcion;
+        fetchInput(objeto_opcion);
 
         // Verifica si la opción es válida
         if (objeto_opcion > inv_cant || objeto_opcion < 0)
@@ -119,15 +118,16 @@ void facturar(InventoryItems arr[], int inv_cant)
             textColored(arr[objeto_opcion - 1].name, PURPLE);
             textColored("\"?: ", CYAN);
 
-            std::cin >> unidades_deseadas;
+            fetchInput(unidades_deseadas);
 
             // Verifica si hay suficientes unidades en inventario
             if (unidades_deseadas > arr[objeto_opcion - 1].quantity_left)
             {
                 textColored("\n¡No hay suficientes unidades en inventario!\n", RED);
             }
-            else
-            {
+            else if (unidades_deseadas <= 0) {
+                textColored("\nIngrese una cantidad válida!",RED);
+            } else {
                 bool objeto_ya_facturado = false;
                 // Verifica si el producto ya ha sido facturado
                 for (i = 0; i < productos_cant; i++)
@@ -157,7 +157,7 @@ void facturar(InventoryItems arr[], int inv_cant)
 
         // Pregunta al usuario si desea agregar otro producto a la factura
         textColored("\n#: ¿Desea agregar otro producto? (S/N): ", CYAN);
-        std::cin >> SN;
+        fetchInputSN(SN);
 
         if (SN == "N" || SN == "n")
             facturar_loop = false;
@@ -204,7 +204,7 @@ void facturarMain(InventoryItems arr[], int inv_cant)
     {
         mostrarMenu();  // Muestra el menú de facturación
         std::cout << "#: ";
-        std::cin >> opcion;
+        fetchInput(opcion);
 
         // Ejecuta la acción correspondiente según la opción seleccionada
         switch (opcion)

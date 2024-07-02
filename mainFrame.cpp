@@ -5,7 +5,6 @@
 
 #include "facturacionModulo.h" // Incluye el módulo de facturación, se asume que este archivo contiene funciones relacionadas a la facturación
 
-using std::cin;
 using std::cout;
 using std::string;
 
@@ -62,7 +61,7 @@ int main()
         textColored("<- Salir del Programa", RED);
         cout << "\n\n#: ";
 
-        cin >> input; // Lee la opción del usuario
+        fetchInput(input); // Lee la opción del usuario
 
         // Ejecuta la acción correspondiente según la opción seleccionada
         switch (input)
