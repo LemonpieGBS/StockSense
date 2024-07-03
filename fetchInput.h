@@ -89,7 +89,7 @@ void fetchInput(int &input) {
     }
 
     std::cout << "\n";  // Nueva línea después de la entrada
-    input = stoi(return_string);  // Convertir cadena a entero y asignar a la variable de referencia
+    input = std::stoi(return_string);
 }
 
 // Función para capturar entrada de números flotantes

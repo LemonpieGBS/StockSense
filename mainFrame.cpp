@@ -9,7 +9,7 @@
 using std::cout;
 using std::string;
 
-string version = "1.0.0"; // Define la versión del programa
+string version = "1.0.1"; // Define la versión del programa
 
 // Declaración de funciones que serán definidas más adelante
 void showMenuTitle();

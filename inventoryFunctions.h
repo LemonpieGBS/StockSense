@@ -316,7 +316,7 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
         textColored("\n\nValor nuevo: ", GREEN);
         fetchInput(inventario[itemFound].provider);
 
-        registrarLog("El proveedor del producto '" + inventario[itemFound].name + "' fue cambiado de: '" + old_att + "' a '" + inventario[itemFound].provider + "'");
+        registrarLog("El proveedor del producto '" + inventario[itemFound].provider + "' fue cambiado de: '" + old_att + "' a '" + inventario[itemFound].provider + "'");
 
         textColored("\n¡Objeto editado exitosamente!", GREEN);
         break;
@@ -334,7 +334,7 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
             fetchInput(inventario[itemFound].quantity_left);
         }
 
-        registrarLog("La cantidad de unidades del producto '" + inventario[itemFound].name + "' fueron cambiadas de: '" + old_att + "' a '" + std::to_string(inventario[itemFound].quantity_left) + "'");
+        registrarLog("La cantidad de unidades del producto '" + std::to_string(inventario[itemFound].quantity_left) + "' fueron cambiadas de: '" + old_att + "' a '" + std::to_string(inventario[itemFound].quantity_left) + "'");
 
         textColored("\n¡Objeto editado exitosamente!", GREEN);
         break;
@@ -352,7 +352,7 @@ void editOnInventory(InventoryItems inventario[], int inventory_size)
             fetchInput(inventario[itemFound].price);
         }
 
-        registrarLog("El precio del producto '" + inventario[itemFound].name + "' fue cambiado de: '" + old_att + "' a '" + std::to_string(inventario[itemFound].price) + "'");
+        registrarLog("El precio del producto '" + std::to_string(inventario[itemFound].price) + "' fue cambiado de: '" + old_att + "' a '" + std::to_string(inventario[itemFound].price) + "'");
 
         textColored("\n¡Objeto editado exitosamente!", GREEN);
         break;
